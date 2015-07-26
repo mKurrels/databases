@@ -63,7 +63,7 @@ $(function() {
         data: { order: '-createdAt'},
         success: function(data) {
           console.log('chatterbox: Messages fetched');
-
+          app.stopSpinner();
           // Don't bother if we have nothing to work with
           if (!data.results || !data.results.length) { return; }
 
