@@ -4,7 +4,15 @@ db.connect();
 
 module.exports = {
   messages: {
-    get: function () {}, // a function which produces all the messages
+    get: function (cb) {
+      var queryString = 'select * from messages';
+      var query = db.query(queryString, function(err, result) {
+        if (err) {
+          console.log(err);
+        }
+        cb(result);
+      });
+    }, // a function which produces all the messages
     post: function (messageData, cb) {
       var queryString = 'insert into messages (message, roomname, username) values ("'+ messageData.message +'", "'+ messageData.roomname +'", "'+ messageData.username +'")';
       var query = db.query(queryString, function(err, result) {
